@@ -1,0 +1,14 @@
+{
+  "name": "alathers-FullStyleAdoption",
+  "version": "0.1.0",
+  "author": "Adam Lathers",
+  "summary": "Demo module for porting existing workflow into puppet standard format module",
+  "license": "Apache-2.0",
+  "source": "http://github.com/alathers/code_samples/Puppet",
+  "project_page": "n/a",
+  "issues_url": "n/a",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
+}
+

@@ -1,0 +1,22 @@
+As of 5/11/2015 this is 2 trivial modules
+
+
+somehosttype is based on my very first puppet work in 2011/2012. I was porting legacy code from a previous toolset.  
+  The idea was to duplicate and fragment a single massive toolset into 8-10 smaller functionally specific modules.
+  The code has been refactored and in some cases fully deprecated and removed
+  This represents what's remaining, in a highyl sanitized format
+  Of particular not are short comings:
+    -Very limited use of strict ordering
+    -Very limited error management
+    -Use of home brewed functionality; at time of initial authoring many extended features were not avaiable
+    -Gruesome cross module dependancies
+
+
+
+FullStyleAdoption is an attempt to do an "on the spot" migration of the legacy code into the puppet standard style format
+  The module was spawned from scratch using  $ puppet module generate alathers-FullStyleAdoption
+  From there I've replicated what I could, migrating home brewed functions to instead leverage functions from puppet standard lib
+  I am unable to test this code in the infrastrcture I have as of first authoring, so I'm just doing as a course demo flow
+  This includes a spot reading and implementation of the Augeas resource type
+
+
