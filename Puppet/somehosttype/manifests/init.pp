@@ -14,7 +14,7 @@
 #
 # === Parameters
 #
-# $cert_file = if not set, is hard set to intermediate-CA.cer to deploy to /opt/ec/someuser/conf
+# $cert_file = if not set, is hard set to intermediate-CA.cer to deploy to /opt/custom/someuser/conf
 #
 #
 # === Authors
@@ -41,41 +41,41 @@ class somehosttype {
     }
 
 # deploy snmp script to verify access to external SaaS provider.  as of 1/7/2012, it fetches this URL https://somesite.com/some/path
-    file { '/opt/ec/snmp/bin/cybersource_test':
+    file { '/opt/custom/snmp/bin/saasVendor_test':
         ensure  => present,
-        require => File['/opt/ec/snmp'],
+        require => File['/opt/custom/snmp'],
         mode => '0555',
         source  => 'puppet:///modules/someothermodule/saasVendor_test',
     }
 
 # SNMP report to describe present largest JavaVM footprint.  Might not be appropriate for somehosttype, only legacyhosttype?
 # collects largest from call to "ps -C java -o vsize --sort vsize"
-    file { '/opt/ec/snmp/bin/java_vm_used.sh':
+    file { '/opt/custom/snmp/bin/java_vm_used.sh':
         ensure  => present,
         owner   => "root",
         group   => "root",
-        require => File['/opt/ec/snmp'],
+        require => File['/opt/custom/snmp'],
         mode    => '0755',
         source  => 'puppet:///modules/somehosttype/java_vm_used.sh',
     }
 
 #Create basic filesystem paths since they are likely not properly created by packages
-    file { "/opt/ec/someuser":
+    file { "/opt/custom/someuser":
         ensure => directory,
         owner  => "root",
         group  => "root",
         mode   => "0755",
     }
 
-    file { "/opt/ec/someuser/conf":
+    file { "/opt/custom/someuser/conf":
         ensure  => directory,
         owner   => "someuser",
         group   => "someuser",
         mode    => "0755",
-        require => [ User["someuser"], File["/opt/ec/someuser"] ]
+        require => [ User["someuser"], File["/opt/custom/someuser"] ]
     }
 
-    file { "/var/ec":
+    file { "/var/custom":
         owner   => "someuser",
         group   => "someuser",
         mode    => "0755",
@@ -90,12 +90,12 @@ class somehosttype {
     }
 
 ## Prefer that someday this is a secure filestore instead of puppet source tree
-    file { "/opt/ec/someuser/conf/${cert_file}":
+    file { "/opt/custom/someuser/conf/${cert_file}":
         ensure  => file,
         owner   => "someuser",
         group   => "someuser",
         mode    => "0640",
-        require => [ User["someuser"], File["/opt/ec/someuser/conf"] ],
+        require => [ User["someuser"], File["/opt/custom/someuser/conf"] ],
         source  => "puppet:///modules/somehosttype/${cert_file}",
     }
 
