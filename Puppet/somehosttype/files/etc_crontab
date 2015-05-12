@@ -1,0 +1,15 @@
+# WARNING this file is maintained by puppet and any changes you make by hand
+# will be overwritten in minutes.  Please contact sysadmins
+# if you need this file edited.
+
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=
+HOME=/
+
+# run-parts
+01 * * * * root run-parts /etc/cron.hourly
+0 0 * * * root run-parts /etc/cron.daily
+22 4 * * 0 root run-parts /etc/cron.weekly
+42 4 1 * * root run-parts /etc/cron.monthly
+

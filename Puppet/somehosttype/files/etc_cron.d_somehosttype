@@ -1,0 +1,13 @@
+# WARNING this file is maintained by puppet and any changes you make by hand
+# will be overwritten in minutes.  Please contact sysadmins@
+# if you need this file edited.
+######
+# Application Log Management
+######
+MAILTO=
+
+# remove all logs over 7 days old and zip all Broker logs over 2 days old
+0 3 * * *  someuesr find /var/ec/ -type f -mtime +7 -and ! -path "*_jsp*" -exec nice -n 10 rm {} \;
+0 4 * * *  someuser find /var/ec/ -type f -mmin +120 -name "*log*" -and ! -name "*.gz" ! -name "jvm.log" -and ! -path "*_jsp*" -exec nice -n 10 gzip -9 {} \;
+
+30 03 * * * root /usr/local/bin/ec-pkgclean.pl 4 2>&1
